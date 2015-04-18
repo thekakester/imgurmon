@@ -9,6 +9,16 @@
     "resources": {
         "media": [
             {
+                "file": "data/map.collision",
+                "name": "COLLISION",
+                "type": "raw"
+            },
+            {
+                "file": "images/player.png",
+                "name": "PLAYER",
+                "type": "png"
+            },
+            {
                 "file": "data/map.map",
                 "name": "MAP",
                 "type": "raw"

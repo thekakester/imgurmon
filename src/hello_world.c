@@ -4,10 +4,10 @@
 #include "classes.h"
 #include "game.h"
   
+#define ROTATE_THRESHOLD 200
+  
 Window* window;
 Layer* layer;
-int x = 0;
-int y = 0;
 
 void timer_handler(void* context) {
   layer_mark_dirty(layer);
@@ -20,11 +20,54 @@ void update(Layer* layer, GContext* ctx) {
   render(ctx);  //Call our render in our renderer
 }
 
+void entity_create(Entity* entity) {
+  entity->x = entity->y = entity->newX = entity->newY = 3;
+  entity->tween_percent = 0.0f;
+}
+
 /**Gets called when accelerometer info is given
+Update: this basically turned into the movement handler.
+All movement info is handled here, collision included
 */
 static void data_handler(AccelData *data, uint32_t num_samples) {
-  xOffset += data[0].x / 40;
-  yOffset += data[0].y / 40;
+  //Are we allowed to move yet?
+  if (player.tween_percent >= 1) {
+    //If we are out of a dead zone
+    if (abs(data[0].x) > ROTATE_THRESHOLD || abs(data[0].y) > ROTATE_THRESHOLD) {
+      
+      //Store old position
+      player.x = player.newX;
+      player.y = player.newY;
+      
+      //Decide where we should go
+      //Up/Left/Down/Right, based on amount of tilt
+      if (abs(data[0].x) > abs(data[0].y)) {
+        if (data[0].x > 0) {
+          player.newX++;      //Tilting to the right
+        } else {
+          player.newX--;      //Tilting to the left
+        }
+      } else {
+        if (data[0].y > 0) {
+          player.newY--;      //Tilting upward
+        } else {
+          player.newY++;      //Tilting downward
+        }
+      }
+      
+      //If there is a block where we are trying to go, just undo it
+      if (collision[player.newY][player.newX]) {
+        //Hitting something!  Undo movement!
+        player.newX = player.x;
+        player.newY = player.y;
+      }
+      
+      //If we're actually going to move, reset the tween
+      if (player.newY != player.y || player.newX != player.x) {
+        player.tween_percent = 0;
+      }
+    }
+  }
 }
 
 void handle_init(void) {
@@ -38,11 +81,15 @@ void handle_init(void) {
   layer_mark_dirty(layer);
   
   //Set our accelerometer procedure
-  int num_samples = 3;
+  int num_samples = 1;
   accel_data_service_subscribe(num_samples, data_handler);
   
-  //Load up our tileset
+  //Load up our tileset & player
   tiles = gbitmap_create_with_resource(RESOURCE_ID_TILES);
+  
+  playerSprite = gbitmap_create_with_resource(RESOURCE_ID_PLAYER);
+  
+  //Set a timer to call our update
   timer_handler(NULL);
   
   //Load up all our imgurmon
@@ -50,6 +97,9 @@ void handle_init(void) {
   
   //Load up the map
   load_map();
+  
+  //Initialize our player object
+  entity_create(&player);
 }
 
 void handle_deinit(void) {

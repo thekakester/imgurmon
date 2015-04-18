@@ -69,7 +69,7 @@ void load_imgurmon() {
     int evolvelvl = (int)substring[27];
     
     
-    printf("Loading %s. HP:%d, attacks:%d:%d:%d, type:%d, evolvesto:%d, evolvelvl:%d\n",substring,hp,attack1,attack2,attack3,type,evolve,evolvelvl);
+    //printf("Loading %s. HP:%d, attacks:%d:%d:%d, type:%d, evolvesto:%d, evolvelvl:%d\n",substring,hp,attack1,attack2,attack3,type,evolve,evolvelvl);
     //Store this imgurmon
     //imgurmon_stats[i] = imgurmon_stats_create(&(imgurmon_stats[i]),substring,hp,attack1,attack2,attack3,type,evolve,evolvelvl);
   }
@@ -79,15 +79,21 @@ void load_imgurmon() {
 
 void load_map() {
   //Read the map file, and look at the first integer to get the size
+  //Handle collision too (separate file)
   char* s_buffer;
+  char* collisionBuffer;
+  
   // Get resource and size
   ResHandle handle = resource_get_handle(RESOURCE_ID_MAP);
   int res_size = resource_size(handle);
+  ResHandle collisionHandle = resource_get_handle(RESOURCE_ID_COLLISION);
+  int collision_size = resource_size(collisionHandle);
 
   // Copy to buffer
   s_buffer = (char*)malloc(res_size);
   resource_load(handle, (uint8_t*)s_buffer, res_size);
-  
+  collisionBuffer = (char*)malloc(collision_size);
+  resource_load(collisionHandle, (uint8_t*)collisionBuffer, collision_size);
   
   //Now that the map is loaded, lets start copying stuff!
   map_size = buildInt(s_buffer);
@@ -97,6 +103,7 @@ void load_map() {
   
   //Allocate the rows
   map = (char**)malloc(sizeof(char*)*map_size);
+  collision = (char**)malloc(sizeof(char*)*map_size);
 
   int index = 0;  //Where are we in the file?
   
@@ -104,16 +111,20 @@ void load_map() {
   for (row = 0; row < map_size; row++) {
     //Allocate this column
     map[row] = (char*)malloc(sizeof(char)*map_size);
+    collision[row] = (char*)malloc(sizeof(char)*map_size);
+    
+    //Read the map data and apply it
     for (col = 0; col < map_size; col++) {
       //Read in the map file and store it here!
       map[row][col] = data[index];
-      printf("%d ", data[index]);
+      collision[row][col] = collisionBuffer[index];
       index++;
     }
-    printf("\n");
   }
   
+  //Free the map and collision buffer
   free(s_buffer);
+  free(collisionBuffer);
 }
 
 /**Simple drawing method that lets us take advantage of spritesheets

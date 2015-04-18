@@ -23,11 +23,11 @@ typedef struct {
 } Imgurmon_Stats;
 
 char** map;
+char** collision;
 GBitmap* tiles;
+GBitmap* playerSprite;
 int map_size;
 
-typedef struct {
-  float tweenPercent;  //Number bewtween 0 and 1 (0%-100%)
-} Entity;
+
 
 #endif
