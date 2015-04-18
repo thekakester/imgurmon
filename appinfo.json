@@ -1,0 +1,31 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "mitcheld@mtu.edu",
+    "longName": "Imgurmon",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "data/stats.csv",
+                "name": "STATS",
+                "type": "raw"
+            },
+            {
+                "file": "images/tiles.png",
+                "name": "TILES",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "2",
+    "shortName": "Imgurmon",
+    "uuid": "139b8a77-436d-40e6-96c0-b4b80a7e1621",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
