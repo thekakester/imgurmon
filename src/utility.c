@@ -2,7 +2,8 @@
 #define UTILITY_C
 #include <pebble.h>
 #include <stdio.h>
-#include "includes.h"
+#include "game.h"
+#include "classes.h"
   
 /*Create and store an imgurmon stats
 Stores this to the specified imgurmon pointer

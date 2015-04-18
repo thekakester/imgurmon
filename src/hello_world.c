@@ -1,6 +1,6 @@
 #include <pebble.h>
-#include "includes.h"
-
+#include "utility.h"
+  
 Window* window;
 Layer* layer;
 GBitmap* tiles;

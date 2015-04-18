@@ -1,7 +1,7 @@
 #ifndef CLASSES_C
 #define CLASSES_C 1
+  
 #include <pebble.h>
-#include "includes.h"
 //Types
 #define Type int
 #define NONE 0
@@ -20,4 +20,5 @@ typedef struct {
   int evolve;
   int evolvelvl;
 } Imgurmon_Stats;
+
 #endif
