@@ -5,4 +5,9 @@
   
 //Prototypes
 Imgurmon_Stats* get_imgurmon_stats(int id);
+
+//How to offset the screen
+int xOffset;
+int yOffset;
+
 #endif

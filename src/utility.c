@@ -77,6 +77,45 @@ void load_imgurmon() {
   free(s_buffer);
 }
 
+void load_map() {
+  //Read the map file, and look at the first integer to get the size
+  char* s_buffer;
+  // Get resource and size
+  ResHandle handle = resource_get_handle(RESOURCE_ID_MAP);
+  int res_size = resource_size(handle);
+
+  // Copy to buffer
+  s_buffer = (char*)malloc(res_size);
+  resource_load(handle, (uint8_t*)s_buffer, res_size);
+  
+  
+  //Now that the map is loaded, lets start copying stuff!
+  map_size = buildInt(s_buffer);
+  
+  char* data = &(s_buffer[4]);
+  int row,col;
+  
+  //Allocate the rows
+  map = (char**)malloc(sizeof(char*)*map_size);
+
+  int index = 0;  //Where are we in the file?
+  
+  //Begin reading in the map file
+  for (row = 0; row < map_size; row++) {
+    //Allocate this column
+    map[row] = (char*)malloc(sizeof(char)*map_size);
+    for (col = 0; col < map_size; col++) {
+      //Read in the map file and store it here!
+      map[row][col] = data[index];
+      printf("%d ", data[index]);
+      index++;
+    }
+    printf("\n");
+  }
+  
+  free(s_buffer);
+}
+
 /**Simple drawing method that lets us take advantage of spritesheets
 GRect src is the source rectangle (where to pull the image from) and
 GRect dest is where to draw it on the screen

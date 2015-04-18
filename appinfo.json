@@ -9,14 +9,19 @@
     "resources": {
         "media": [
             {
-                "file": "data/stats.blob",
-                "name": "STATS",
+                "file": "data/map.map",
+                "name": "MAP",
                 "type": "raw"
             },
             {
                 "file": "images/tiles.png",
                 "name": "TILES",
                 "type": "png"
+            },
+            {
+                "file": "data/stats.blob",
+                "name": "STATS",
+                "type": "raw"
             }
         ]
     },

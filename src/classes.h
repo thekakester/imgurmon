@@ -4,4 +4,9 @@
   
   typedef struct {
 } Imgurmon_Stats;
+
+char** map;  //Malloc'd in utility
+int map_size;
+GBitmap* tiles;
+
 #endif  
