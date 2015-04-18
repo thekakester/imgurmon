@@ -1,6 +1,5 @@
 #include <pebble.h>
-#include "utility.h"
-#include "game.h"
+#include "includes.h"
 
 Window* window;
 Layer* layer;

@@ -9,7 +9,7 @@
     "resources": {
         "media": [
             {
-                "file": "data/stats.csv",
+                "file": "data/stats.blob",
                 "name": "STATS",
                 "type": "raw"
             },
