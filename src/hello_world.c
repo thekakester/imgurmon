@@ -4,7 +4,7 @@
 #include "classes.h"
 #include "game.h"
   
-#define ROTATE_THRESHOLD 0
+#define ROTATE_THRESHOLD 100
   
 Window* window;
 Layer* layer;

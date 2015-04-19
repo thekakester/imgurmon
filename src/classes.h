@@ -2,7 +2,17 @@
 #define CLASSES_H 1
   #include <pebble.h>
   
-  typedef struct {} Imgurmon_Stats;
+    
+typedef struct {
+  char name[20];
+  int hp;
+  int type;
+  int attack1;
+  int attack2;
+  int attack3;
+  int evolve;
+  int evolvelvl;
+} Imgurmon_Stats;
 
 //Entity
 typedef struct {

@@ -6,9 +6,8 @@
 
 //Also defined in game.c
 #define NUM_IMGURMON 2
-  
-//Prototypes
-Imgurmon_Stats* get_imgurmon_stats(int id);
+    
+Imgurmon_Stats imgurmon_stats[NUM_IMGURMON];
 
 //How to offset the screen
 int xOffset;

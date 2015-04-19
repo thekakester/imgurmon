@@ -83,20 +83,20 @@ void render(GContext* ctx) {
   
   
   //For the first few render frames, pick a random imgurmon
-  if (renderFrame > 0) {
-    renderFrame--;
-    if (renderFrame > 150) {
-       //Clear screen to white
-      imgurmonID = (imgurmonID + 1) % NUM_IMGURMON;
-      graphics_context_set_fill_color(ctx, GColorWhite);
-      graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
-    }
-    //Load random imgurmon
-    printf("1: %d       2: %d",RESOURCE_ID_IMGURMON0,RESOURCE_ID_IMGURMON1);
-    loadImgurmon(0,imgurmonID);
-    graphics_draw_bitmap_in_rect(ctx, imgurmonSprite[0], GRect(0,0,57,57));
-    return;
-  }
+//   if (renderFrame > 0) {
+//     renderFrame--;
+//     if (renderFrame > 150) {
+//        //Clear screen to white
+//       imgurmonID = (imgurmonID + 1) % NUM_IMGURMON;
+//       graphics_context_set_fill_color(ctx, GColorWhite);
+//       graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
+//     }
+//     //Load random imgurmon
+//     printf("1: %d       2: %d",RESOURCE_ID_IMGURMON0,RESOURCE_ID_IMGURMON1);
+//     loadImgurmon(0,imgurmonID);
+//     graphics_draw_bitmap_in_rect(ctx, imgurmonSprite[0], GRect(0,0,57,57));
+//     return;
+//   }
   
   //Set screen black for first render
   graphics_context_set_fill_color(ctx, GColorBlack);

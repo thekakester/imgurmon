@@ -9,7 +9,14 @@
 Stores this to the specified imgurmon pointer
 */
 void imgurmon_stats_create(Imgurmon_Stats* stats, char* name, int hp, int attack1, int attack2, int attack3, int type, int evolve, int evolvelvl) {
-  
+  strcpy(&(stats->name[0]), name);
+  stats->hp = hp;
+  stats->attack1 = attack1;
+  stats->attack2 = attack2;
+  stats->attack3 = attack3;
+  stats->type = type;
+  stats->evolve = evolve;
+  stats->evolvelvl = evolvelvl;
 }
   
 //Turn a 4 byte array into an integer  
@@ -71,7 +78,7 @@ void load_imgurmon() {
     
     //printf("Loading %s. HP:%d, attacks:%d:%d:%d, type:%d, evolvesto:%d, evolvelvl:%d\n",substring,hp,attack1,attack2,attack3,type,evolve,evolvelvl);
     //Store this imgurmon
-    //imgurmon_stats[i] = imgurmon_stats_create(&(imgurmon_stats[i]),substring,hp,attack1,attack2,attack3,type,evolve,evolvelvl);
+    //imgurmon_stats_create(&(imgurmon_stats[i]),substring,hp,attack1,attack2,attack3,type,evolve,evolvelvl);
   }
   
   free(s_buffer);
