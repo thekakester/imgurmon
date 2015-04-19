@@ -135,6 +135,17 @@ void graphics_draw_bitmap(GContext* ctx, GBitmap* bitmap, GRect src, GRect dest)
   free(sprite);
 }
 
+/*Get the resource ID given an imgurmon ID.
+Resource IDs are not consistent, and tend to get shuffled during compile.
+This is the best way to handle it!
+*/
+int getResourceID(int id) {
+  switch(id) {
+    case 1:  return RESOURCE_ID_IMGURMON1;
+    default: return RESOURCE_ID_IMGURMON0;
+  }
+}
+
 /**There are 2 slots for loading imgurmon, one is yours,
 and the other belongs to your enemy.  This will free any previously malloc'd
 resource, and re-load the image
@@ -142,13 +153,13 @@ player = 0 or 1, the index where to store
 id = 0-#imgurmon.  The id of the imgurmon to load
 */
 void loadImgurmon(int player, int id) {
-  if (imgurmonSprite[player]) {
+  if (imgurmon[player].sprite) {
     //We need to avoid a memory leak
-    free(imgurmonSprite[player]);
+    gbitmap_destroy(imgurmon[player].sprite);
   }
   
   //Load up the sprite
-  imgurmonSprite[player] = gbitmap_create_with_resource((uint32_t)id);
+  imgurmon[player].sprite = gbitmap_create_with_resource(getResourceID(id));
 }
 
 /**The "64" bit determines whether or not a tile is walkable

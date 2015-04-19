@@ -9,18 +9,19 @@
     "resources": {
         "media": [
             {
-                "file": "images/tiles.png",
-                "name": "TILES",
+                "file": "images/Imgurlogo.png",
+                "menuIcon": true,
+                "name": "logo",
                 "type": "png"
             },
             {
-                "file": "data/map.map",
-                "name": "MAP",
+                "file": "data/stats.blob",
+                "name": "STATS",
                 "type": "raw"
             },
             {
-                "file": "images/0.png",
-                "name": "IMGURMON0",
+                "file": "images/player.png",
+                "name": "PLAYER",
                 "type": "png"
             },
             {
@@ -29,14 +30,19 @@
                 "type": "png"
             },
             {
-                "file": "images/player.png",
-                "name": "PLAYER",
+                "file": "images/0.png",
+                "name": "IMGURMON0",
                 "type": "png"
             },
             {
-                "file": "data/stats.blob",
-                "name": "STATS",
+                "file": "data/map.map",
+                "name": "MAP",
                 "type": "raw"
+            },
+            {
+                "file": "images/tiles.png",
+                "name": "TILES",
+                "type": "png"
             }
         ]
     },

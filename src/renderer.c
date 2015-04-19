@@ -20,20 +20,20 @@ void battle(GContext* ctx) {
   graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
   if (mode == 101) {
     //Select random imgurmon
-    //int id = rand() % 2;
-    loadImgurmon(0,RESOURCE_ID_IMGURMON0);
-    loadImgurmon(1,RESOURCE_ID_IMGURMON1);
+    int id = rand() % 2;
+    loadImgurmon(0,id);
+    loadImgurmon(1,(id+1)%2);
   }
   
   mode+=3;  //Note, mode is already incremented earlier
-  if (mode > 244) { mode = 244; }
+  if (mode > 244) { mode = 0; }
   
   //Move in for each turn
   int x = mode - 100 - 57;
-  graphics_draw_bitmap_in_rect(ctx, imgurmonSprite[1], GRect(x, 0, 57, 57));
+  graphics_draw_bitmap_in_rect(ctx, imgurmon[1].sprite, GRect(x, 0, 57, 57));
   
   x = 144 - (mode - 100);
-  graphics_draw_bitmap_in_rect(ctx, imgurmonSprite[0], GRect(x, 100, 57, 57));
+  graphics_draw_bitmap_in_rect(ctx, imgurmon[0].sprite, GRect(x, 100, 57, 57));
 }
   
 void render_map(GContext* ctx) {

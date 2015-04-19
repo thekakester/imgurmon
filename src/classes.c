@@ -9,7 +9,6 @@
 #define FIRE 1
 #define WATER 2
 #define GRASS 3
-  
 
 
 char** map;

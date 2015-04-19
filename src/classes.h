@@ -14,6 +14,13 @@ typedef struct {
   int evolvelvl;
 } Imgurmon_Stats;
 
+//Imgurmon
+typedef struct {
+  Imgurmon_Stats* stats;
+  GBitmap* sprite;
+  int hp;
+} Imgurmon;
+
 //Entity
 typedef struct {
   float tween_percent;  //Number bewtween 0 and 1 (0%-100%)
@@ -29,6 +36,6 @@ char** map;        //Malloc'd in utility
 int map_size;
 GBitmap* tiles;
 GBitmap* playerSprite;
-GBitmap* imgurmonSprite[2];
+Imgurmon imgurmon[2];
 
 #endif  

@@ -70,7 +70,6 @@ static void data_handler(AccelData *data, uint32_t num_samples) {
         
         //If there's a battle (Walking in tall grass)
         if (map[player.newY][player.newX] == 1) {
-          srand (time(NULL));
           if (rand() % 5 == 0) {
             mode = 1;  //Switch to battle
             
@@ -118,10 +117,13 @@ void handle_init(void) {
   timer_handler(NULL);
   
   //Set our imgurmon to null (so we know not to clear them)
-  imgurmonSprite[0] = imgurmonSprite[1] = (GBitmap*)0;
+  imgurmon[0].sprite = imgurmon[1].sprite = (GBitmap*)0;
   
   //Set our game mode to walking
   mode = 0;
+  
+  //Seed random for later use
+  srand (time(NULL));
 }
 
 void handle_deinit(void) {
