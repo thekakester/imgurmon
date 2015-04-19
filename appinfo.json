@@ -9,13 +9,18 @@
     "resources": {
         "media": [
             {
-                "file": "images/0.png",
-                "name": "IMGURMON0",
-                "type": "png"
+                "file": "data/map.map",
+                "name": "MAP",
+                "type": "raw"
             },
             {
-                "file": "images/1.png",
-                "name": "IMGURMON1",
+                "file": "data/stats.blob",
+                "name": "STATS",
+                "type": "raw"
+            },
+            {
+                "file": "images/tiles.png",
+                "name": "TILES",
                 "type": "png"
             },
             {
@@ -24,19 +29,14 @@
                 "type": "png"
             },
             {
-                "file": "images/tiles.png",
-                "name": "TILES",
+                "file": "images/1.png",
+                "name": "IMGURMON1",
                 "type": "png"
             },
             {
-                "file": "data/stats.blob",
-                "name": "STATS",
-                "type": "raw"
-            },
-            {
-                "file": "data/map.map",
-                "name": "MAP",
-                "type": "raw"
+                "file": "images/0.png",
+                "name": "IMGURMON0",
+                "type": "png"
             }
         ]
     },

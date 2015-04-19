@@ -5,7 +5,7 @@
 #include "game.h"
 
 //Also defined in game.c
-#define NUM_IMGURMON 40
+#define NUM_IMGURMON 2
   
 //Prototypes
 Imgurmon_Stats* get_imgurmon_stats(int id);

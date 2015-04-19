@@ -23,7 +23,6 @@ void battle(GContext* ctx) {
     //int id = rand() % 2;
     loadImgurmon(0,RESOURCE_ID_IMGURMON0);
     loadImgurmon(1,RESOURCE_ID_IMGURMON1);
-    printf("%d",(int)imgurmonSprite[1]);
   }
   
   mode+=3;  //Note, mode is already incremented earlier
@@ -93,7 +92,7 @@ void render(GContext* ctx) {
       graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
     }
     //Load random imgurmon
-    
+    printf("1: %d       2: %d",RESOURCE_ID_IMGURMON0,RESOURCE_ID_IMGURMON1);
     loadImgurmon(0,imgurmonID);
     graphics_draw_bitmap_in_rect(ctx, imgurmonSprite[0], GRect(0,0,57,57));
     return;
