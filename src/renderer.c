@@ -20,13 +20,14 @@ void battle(GContext* ctx) {
   graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
   if (mode == 101) {
     //Select random imgurmon
-    int id = rand() % 2;
+    int id = rand() % NUM_IMGURMON;
     loadImgurmon(0,id);
-    loadImgurmon(1,(id+1)%2);
+    id = rand() % NUM_IMGURMON;
+    loadImgurmon(1,id);
   }
   
   mode+=3;  //Note, mode is already incremented earlier
-  if (mode > 244) { mode = 0; }
+  if (mode > 244) { mode = 244; }
   
   //Move in for each turn
   int x = mode - 100 - 57;
@@ -34,6 +35,29 @@ void battle(GContext* ctx) {
   
   x = 144 - (mode - 100);
   graphics_draw_bitmap_in_rect(ctx, imgurmon[0].sprite, GRect(x, 100, 57, 57));
+  
+  //Draw the HP bars
+  if (mode >= 244) {
+    graphics_context_set_stroke_color(ctx, GColorBlack);
+    graphics_context_set_text_color(ctx, GColorBlack);
+    
+    graphics_draw_rect(ctx, GRect(2,2,87,32));
+    graphics_draw_rect(ctx, GRect(4,24,83,6));  //Width of 83
+    float percent = (float)imgurmon[1].hp / (float)imgurmon[1].stats.hp;
+    graphics_draw_rect(ctx, GRect(6,26,(int)(79*percent),2));
+    graphics_draw_text(ctx, imgurmon[1].stats.name, fonts_get_system_font(FONT_KEY_GOTHIC_14), GRect(4,4,83,20), GTextOverflowModeFill, GTextAlignmentLeft, NULL);
+    
+    graphics_draw_rect(ctx, GRect(57,100,87,32));
+    graphics_draw_rect(ctx, GRect(59,124,83,6));
+    percent = (float)imgurmon[0].hp / (float)imgurmon[0].stats.hp;
+    graphics_draw_rect(ctx, GRect(61,126,(int)(79*percent),2));
+    graphics_draw_text(ctx, imgurmon[0].stats.name, fonts_get_system_font(FONT_KEY_GOTHIC_14), GRect(59,102,83,20), GTextOverflowModeFill, GTextAlignmentLeft, NULL);
+  }
+  
+  if (buttonPressed) {
+    mode = 0;
+    buttonPressed = 0;
+  }
 }
   
 void render_map(GContext* ctx) {

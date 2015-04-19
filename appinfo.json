@@ -9,23 +9,79 @@
     "resources": {
         "media": [
             {
-                "file": "images/player.png",
-                "name": "PLAYER",
-                "type": "png"
-            },
-            {
-                "file": "images/tiles.png",
-                "name": "TILES",
-                "type": "png"
-            },
-            {
-                "file": "data/map.map",
-                "name": "MAP",
+                "file": "data/stats.blob",
+                "name": "STATS",
                 "type": "raw"
             },
             {
-                "file": "images/0.png",
-                "name": "IMGURMON0",
+                "file": "images/2.png",
+                "name": "IMGURMON2",
+                "type": "png"
+            },
+            {
+                "file": "images/3.png",
+                "name": "IMGURMON3",
+                "type": "png"
+            },
+            {
+                "file": "images/4.png",
+                "name": "IMGURMON4",
+                "type": "png"
+            },
+            {
+                "file": "images/5.png",
+                "name": "IMGURMON5",
+                "type": "png"
+            },
+            {
+                "file": "images/6.png",
+                "name": "IMGURMON6",
+                "type": "png"
+            },
+            {
+                "file": "images/7.png",
+                "name": "IMGURMON7",
+                "type": "png"
+            },
+            {
+                "file": "images/8.png",
+                "name": "IMGURMON8",
+                "type": "png"
+            },
+            {
+                "file": "images/9.png",
+                "name": "IMGURMON9",
+                "type": "png"
+            },
+            {
+                "file": "images/10.png",
+                "name": "IMGURMON10",
+                "type": "png"
+            },
+            {
+                "file": "images/11.png",
+                "name": "IMGURMON11",
+                "type": "png"
+            },
+            {
+                "file": "images/12.png",
+                "name": "IMGURMON12",
+                "type": "png"
+            },
+            {
+                "file": "images/13.png",
+                "name": "IMGURMON13",
+                "type": "png"
+            },
+            {
+                "file": "images/14.png",
+                "name": "IMGURMON14",
+                "type": "png"
+            },
+            {
+                "file": "images/Imgurlogo.png",
+                "menuIcon": true,
+                "name": "logo",
                 "type": "png"
             },
             {
@@ -34,14 +90,23 @@
                 "type": "png"
             },
             {
-                "file": "data/stats.blob",
-                "name": "STATS",
+                "file": "images/0.png",
+                "name": "IMGURMON0",
+                "type": "png"
+            },
+            {
+                "file": "data/map.map",
+                "name": "MAP",
                 "type": "raw"
             },
             {
-                "file": "images/Imgurlogo.png",
-                "menuIcon": true,
-                "name": "logo",
+                "file": "images/tiles.png",
+                "name": "TILES",
+                "type": "png"
+            },
+            {
+                "file": "images/player.png",
+                "name": "PLAYER",
                 "type": "png"
             }
         ]

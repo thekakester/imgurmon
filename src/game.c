@@ -4,7 +4,7 @@
 #include "classes.h"  
   
 //Also defined in game.h
-#define NUM_IMGURMON 2
+#define NUM_IMGURMON 15
 
 //How to offset the screen
 int xOffset;

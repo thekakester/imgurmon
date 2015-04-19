@@ -16,7 +16,7 @@ typedef struct {
 
 //Imgurmon
 typedef struct {
-  Imgurmon_Stats* stats;
+  Imgurmon_Stats stats;
   GBitmap* sprite;
   int hp;
 } Imgurmon;
@@ -37,5 +37,6 @@ int map_size;
 GBitmap* tiles;
 GBitmap* playerSprite;
 Imgurmon imgurmon[2];
+int buttonPressed;
 
 #endif  

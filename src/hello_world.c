@@ -14,6 +14,17 @@ void timer_handler(void* context) {
   app_timer_register(34, timer_handler, NULL);
 }
 
+static void but_click_handler(ClickRecognizerRef recognizer, void *context) {
+  buttonPressed = 1;
+}
+
+static void click_config_provider(void *context) {
+  // Register the ClickHandlers
+  window_single_click_subscribe(BUTTON_ID_UP, but_click_handler);
+  window_single_click_subscribe(BUTTON_ID_DOWN, but_click_handler);
+  window_single_click_subscribe(BUTTON_ID_SELECT, but_click_handler);
+}
+
 /**Gets called when we need to update our screen
 */
 void update(Layer* layer, GContext* ctx) {
@@ -100,15 +111,17 @@ void handle_init(void) {
   int num_samples = 1;
   accel_data_service_subscribe(num_samples, data_handler);
   
+  //Set button proc
+  window_set_click_config_provider(window, click_config_provider);
+  buttonPressed = 0;
+  printf("Made it here");
+  
   //Load up our images
   tiles = gbitmap_create_with_resource(RESOURCE_ID_TILES);
   playerSprite = gbitmap_create_with_resource(RESOURCE_ID_PLAYER);
   
   //Load up the map
   load_map();
-  
-  //Load up all our imgurmon
-  load_imgurmon();
   
   //Initialize our player object
   entity_create(&player);

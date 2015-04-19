@@ -5,7 +5,7 @@
 #include "game.h"
 
 //Also defined in game.c
-#define NUM_IMGURMON 2
+#define NUM_IMGURMON 15
     
 Imgurmon_Stats imgurmon_stats[NUM_IMGURMON];
 
