@@ -15,19 +15,26 @@ float tween(float x, float xi, float tween) {
 }
 
 void battle(GContext* ctx) {
+  //Clear the background
+  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
   if (mode == 101) {
     //Select random imgurmon
     //int id = rand() % 2;
-    //loadImgurmon(0,RESOURCE_ID_IMGURMON1);
+    loadImgurmon(0,RESOURCE_ID_IMGURMON0);
     loadImgurmon(1,RESOURCE_ID_IMGURMON1);
     printf("%d",(int)imgurmonSprite[1]);
   }
   
+  mode+=3;  //Note, mode is already incremented earlier
   if (mode > 244) { mode = 244; }
   
-  //Move in 2 pixels per turn until 
+  //Move in for each turn
   int x = mode - 100 - 57;
   graphics_draw_bitmap_in_rect(ctx, imgurmonSprite[1], GRect(x, 0, 57, 57));
+  
+  x = 144 - (mode - 100);
+  graphics_draw_bitmap_in_rect(ctx, imgurmonSprite[0], GRect(x, 100, 57, 57));
 }
   
 void render_map(GContext* ctx) {
