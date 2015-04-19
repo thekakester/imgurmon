@@ -14,18 +14,13 @@
                 "type": "raw"
             },
             {
-                "file": "images/player.png",
-                "name": "PLAYER",
-                "type": "png"
+                "file": "data/stats.blob",
+                "name": "STATS",
+                "type": "raw"
             },
             {
-                "file": "images/tiles.png",
-                "name": "TILES",
-                "type": "png"
-            },
-            {
-                "file": "images/1.png",
-                "name": "IMGURMON1",
+                "file": "images/Imgurmon_BW.png",
+                "name": "IMGURMON",
                 "type": "png"
             },
             {
@@ -34,14 +29,19 @@
                 "type": "png"
             },
             {
-                "file": "images/Imgurmon_BW.png",
-                "name": "IMGURMON",
+                "file": "images/1.png",
+                "name": "IMGURMON1",
                 "type": "png"
             },
             {
-                "file": "data/stats.blob",
-                "name": "STATS",
-                "type": "raw"
+                "file": "images/tiles.png",
+                "name": "TILES",
+                "type": "png"
+            },
+            {
+                "file": "images/player.png",
+                "name": "PLAYER",
+                "type": "png"
             }
         ]
     },
