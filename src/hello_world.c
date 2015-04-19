@@ -4,7 +4,7 @@
 #include "classes.h"
 #include "game.h"
   
-#define ROTATE_THRESHOLD 200
+#define ROTATE_THRESHOLD 0
   
 Window* window;
 Layer* layer;
@@ -71,7 +71,7 @@ static void data_handler(AccelData *data, uint32_t num_samples) {
         //If there's a battle (Walking in tall grass)
         if (map[player.newY][player.newX] == 1) {
           srand (time(NULL));
-          if (rand() % 10 == 0) {
+          if (rand() % 5 == 0) {
             mode = 1;  //Switch to battle
             
           }

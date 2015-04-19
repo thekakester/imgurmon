@@ -74,10 +74,31 @@ void render_player(GContext* ctx) {
 }
   
 //For rendering loading frame.  A useless feature
-int renderFrame = 0;
+int renderFrame = -1;
+int imgurmonID = 0;
 
 //Render everything!
 void render(GContext* ctx) {
+  //initialize renderFrame
+  if (renderFrame == -1) { renderFrame = (rand() % 100) + 300;}
+  
+  
+  //For the first few render frames, pick a random imgurmon
+  if (renderFrame > 0) {
+    renderFrame--;
+    if (renderFrame > 150) {
+       //Clear screen to white
+      imgurmonID = (imgurmonID + 1) % NUM_IMGURMON;
+      graphics_context_set_fill_color(ctx, GColorWhite);
+      graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
+    }
+    //Load random imgurmon
+    
+    loadImgurmon(0,imgurmonID);
+    graphics_draw_bitmap_in_rect(ctx, imgurmonSprite[0], GRect(0,0,57,57));
+    return;
+  }
+  
   //Set screen black for first render
   graphics_context_set_fill_color(ctx, GColorBlack);
   graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
@@ -90,8 +111,7 @@ void render(GContext* ctx) {
       return;
     }
     if (mode %2 == 0) {
-      graphics_context_set_fill_color(ctx, GColorBlack);
-      graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
+      //Return (screen is black)
       return;
     }
   }
