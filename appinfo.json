@@ -9,13 +9,8 @@
     "resources": {
         "media": [
             {
-                "file": "images/player.png",
-                "name": "PLAYER",
-                "type": "png"
-            },
-            {
-                "file": "images/tiles.png",
-                "name": "TILES",
+                "file": "images/0.png",
+                "name": "IMGURMON0",
                 "type": "png"
             },
             {
@@ -24,8 +19,13 @@
                 "type": "png"
             },
             {
-                "file": "images/0.png",
-                "name": "IMGURMON0",
+                "file": "images/player.png",
+                "name": "PLAYER",
+                "type": "png"
+            },
+            {
+                "file": "images/tiles.png",
+                "name": "TILES",
                 "type": "png"
             },
             {
