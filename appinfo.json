@@ -9,8 +9,8 @@
     "resources": {
         "media": [
             {
-                "file": "data/map.collision",
-                "name": "COLLISION",
+                "file": "data/map.map",
+                "name": "MAP",
                 "type": "raw"
             },
             {
@@ -19,13 +19,23 @@
                 "type": "png"
             },
             {
-                "file": "data/map.map",
-                "name": "MAP",
-                "type": "raw"
-            },
-            {
                 "file": "images/tiles.png",
                 "name": "TILES",
+                "type": "png"
+            },
+            {
+                "file": "images/1.png",
+                "name": "IMGURMON1",
+                "type": "png"
+            },
+            {
+                "file": "images/0.png",
+                "name": "IMGURMON0",
+                "type": "png"
+            },
+            {
+                "file": "images/Imgurmon_BW.png",
+                "name": "IMGURMON",
                 "type": "png"
             },
             {

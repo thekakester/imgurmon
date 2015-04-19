@@ -11,13 +11,14 @@ typedef struct {
   int y;
   int newX;
   int newY;
+  int direction;  //0,1,2,3 = down,left,right,up
 } Entity;
 
 char** map;        //Malloc'd in utility
-char** collision;  //Malloc'd in utility
 
 int map_size;
 GBitmap* tiles;
 GBitmap* playerSprite;
+GBitmap* imgurmonSprite[2];
 
 #endif  

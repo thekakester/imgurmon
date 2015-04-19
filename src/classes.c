@@ -23,10 +23,10 @@ typedef struct {
 } Imgurmon_Stats;
 
 char** map;
-char** collision;
 GBitmap* tiles;
 GBitmap* playerSprite;
 int map_size;
+GBitmap* imgurmonSprites[2];
 
 
 

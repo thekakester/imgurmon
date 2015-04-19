@@ -23,6 +23,7 @@ void update(Layer* layer, GContext* ctx) {
 void entity_create(Entity* entity) {
   entity->x = entity->y = entity->newX = entity->newY = 3;
   entity->tween_percent = 0.0f;
+  entity->direction = 0;  //Default looking down
 }
 
 /**Gets called when accelerometer info is given
@@ -31,13 +32,13 @@ All movement info is handled here, collision included
 */
 static void data_handler(AccelData *data, uint32_t num_samples) {
   //Are we allowed to move yet?
-  if (player.tween_percent >= 1) {
+  if (player.tween_percent >= 1 && mode == 0) {
+    //Store old position
+    player.x = player.newX;
+    player.y = player.newY;
+    
     //If we are out of a dead zone
     if (abs(data[0].x) > ROTATE_THRESHOLD || abs(data[0].y) > ROTATE_THRESHOLD) {
-      
-      //Store old position
-      player.x = player.newX;
-      player.y = player.newY;
       
       //Decide where we should go
       //Up/Left/Down/Right, based on amount of tilt
@@ -56,7 +57,7 @@ static void data_handler(AccelData *data, uint32_t num_samples) {
       }
       
       //If there is a block where we are trying to go, just undo it
-      if (collision[player.newY][player.newX]) {
+      if (isUnwalkable(map[player.newY][player.newX])) {
         //Hitting something!  Undo movement!
         player.newX = player.x;
         player.newY = player.y;
@@ -65,6 +66,20 @@ static void data_handler(AccelData *data, uint32_t num_samples) {
       //If we're actually going to move, reset the tween
       if (player.newY != player.y || player.newX != player.x) {
         player.tween_percent = 0;
+        
+        //If there's a battle (Walking in tall grass)
+        if (map[player.newY][player.newX] == 1) {
+          srand (time(NULL));
+          if (rand() % 10 == 0) {
+            mode = 1;  //Switch to battle
+          }
+        }
+        
+        //Update our direction
+        if (player.newY > player.y) { player.direction = 0;}  //Facing down
+        if (player.newX < player.x) { player.direction = 1;}  //Facing left
+        if (player.newX > player.x) { player.direction = 2;}  //Facing right
+        if (player.newY < player.y) { player.direction = 3;}  //Facing up
       }
     }
   }
@@ -84,22 +99,27 @@ void handle_init(void) {
   int num_samples = 1;
   accel_data_service_subscribe(num_samples, data_handler);
   
-  //Load up our tileset & player
+  //Load up our images
   tiles = gbitmap_create_with_resource(RESOURCE_ID_TILES);
-  
   playerSprite = gbitmap_create_with_resource(RESOURCE_ID_PLAYER);
-  
-  //Set a timer to call our update
-  timer_handler(NULL);
-  
-  //Load up all our imgurmon
-  load_imgurmon();
   
   //Load up the map
   load_map();
   
+  //Load up all our imgurmon
+  load_imgurmon();
+  
   //Initialize our player object
   entity_create(&player);
+  
+  //Set a timer to call our update!
+  timer_handler(NULL);
+  
+  //Set our imgurmon to null (so we know not to clear them)
+  imgurmonSprite[0] = imgurmonSprite[1] = (GBitmap*)0;
+  
+  //Set our game mode to walking
+  mode = 0;
 }
 
 void handle_deinit(void) {

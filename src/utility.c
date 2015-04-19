@@ -79,21 +79,15 @@ void load_imgurmon() {
 
 void load_map() {
   //Read the map file, and look at the first integer to get the size
-  //Handle collision too (separate file)
   char* s_buffer;
-  char* collisionBuffer;
   
   // Get resource and size
   ResHandle handle = resource_get_handle(RESOURCE_ID_MAP);
   int res_size = resource_size(handle);
-  ResHandle collisionHandle = resource_get_handle(RESOURCE_ID_COLLISION);
-  int collision_size = resource_size(collisionHandle);
 
   // Copy to buffer
   s_buffer = (char*)malloc(res_size);
   resource_load(handle, (uint8_t*)s_buffer, res_size);
-  collisionBuffer = (char*)malloc(collision_size);
-  resource_load(collisionHandle, (uint8_t*)collisionBuffer, collision_size);
   
   //Now that the map is loaded, lets start copying stuff!
   map_size = buildInt(s_buffer);
@@ -103,7 +97,6 @@ void load_map() {
   
   //Allocate the rows
   map = (char**)malloc(sizeof(char*)*map_size);
-  collision = (char**)malloc(sizeof(char*)*map_size);
 
   int index = 0;  //Where are we in the file?
   
@@ -111,20 +104,17 @@ void load_map() {
   for (row = 0; row < map_size; row++) {
     //Allocate this column
     map[row] = (char*)malloc(sizeof(char)*map_size);
-    collision[row] = (char*)malloc(sizeof(char)*map_size);
     
     //Read the map data and apply it
     for (col = 0; col < map_size; col++) {
       //Read in the map file and store it here!
       map[row][col] = data[index];
-      collision[row][col] = collisionBuffer[index];
       index++;
     }
   }
   
-  //Free the map and collision buffer
+  //Free the map buffer
   free(s_buffer);
-  free(collisionBuffer);
 }
 
 /**Simple drawing method that lets us take advantage of spritesheets
@@ -136,6 +126,29 @@ void graphics_draw_bitmap(GContext* ctx, GBitmap* bitmap, GRect src, GRect dest)
   GBitmap* sprite = gbitmap_create_as_sub_bitmap(bitmap, src);
   graphics_draw_bitmap_in_rect(ctx, sprite, dest);
   free(sprite);
+}
+
+/**There are 2 slots for loading imgurmon, one is yours,
+and the other belongs to your enemy.  This will free any previously malloc'd
+resource, and re-load the image
+player = 0 or 1, the index where to store
+id = 0-#imgurmon.  The id of the imgurmon to load
+*/
+void loadImgurmon(int player, int id) {
+  if (imgurmonSprite[player]) {
+    //We need to avoid a memory leak
+    free(imgurmonSprite[player]);
+  }
+  
+  //Load up the sprite
+  imgurmonSprite[player] = gbitmap_create_with_resource((uint32_t)id);
+}
+
+/**The "64" bit determines whether or not a tile is walkable
+*/
+int isUnwalkable(int tileType) {
+  //If this evaluates to anything other than 0, there is collision
+  return (tileType & 0x40);
 }
 
 #endif

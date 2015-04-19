@@ -3,6 +3,7 @@
 #include <pebble.h>
 #include "classes.h"  
   
+//Also defined in game.h
 #define NUM_IMGURMON 40
   
 Imgurmon_Stats imgurmon_stats[NUM_IMGURMON];
