@@ -9,28 +9,8 @@
     "resources": {
         "media": [
             {
-                "file": "data/map.map",
-                "name": "MAP",
-                "type": "raw"
-            },
-            {
-                "file": "data/stats.blob",
-                "name": "STATS",
-                "type": "raw"
-            },
-            {
-                "file": "images/Imgurmon_BW.png",
-                "name": "IMGURMON",
-                "type": "png"
-            },
-            {
-                "file": "images/0.png",
-                "name": "IMGURMON0",
-                "type": "png"
-            },
-            {
-                "file": "images/1.png",
-                "name": "IMGURMON1",
+                "file": "images/player.png",
+                "name": "PLAYER",
                 "type": "png"
             },
             {
@@ -39,9 +19,24 @@
                 "type": "png"
             },
             {
-                "file": "images/player.png",
-                "name": "PLAYER",
+                "file": "images/1.png",
+                "name": "IMGURMON1",
                 "type": "png"
+            },
+            {
+                "file": "images/0.png",
+                "name": "IMGURMON0",
+                "type": "png"
+            },
+            {
+                "file": "data/stats.blob",
+                "name": "STATS",
+                "type": "raw"
+            },
+            {
+                "file": "data/map.map",
+                "name": "MAP",
+                "type": "raw"
             }
         ]
     },

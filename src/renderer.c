@@ -13,6 +13,22 @@ float tween(float x, float xi, float tween) {
   if (x == xi) { return x; }  //Dont calculate!  Avoid loss of precsion!
   return (x * (1.0f-tween)) + (xi * tween);
 }
+
+void battle(GContext* ctx) {
+  if (mode == 101) {
+    //Select random imgurmon
+    //int id = rand() % 2;
+    //loadImgurmon(0,RESOURCE_ID_IMGURMON1);
+    loadImgurmon(1,RESOURCE_ID_IMGURMON1);
+    printf("%d",(int)imgurmonSprite[1]);
+  }
+  
+  if (mode > 244) { mode = 244; }
+  
+  //Move in 2 pixels per turn until 
+  int x = mode - 100 - 57;
+  graphics_draw_bitmap_in_rect(ctx, imgurmonSprite[1], GRect(x, 0, 57, 57));
+}
   
 void render_map(GContext* ctx) {
   //This is also the player's position
@@ -60,8 +76,13 @@ void render(GContext* ctx) {
   graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
   
   if (mode > 0) {
-    mode = (mode == 1) ? 2 : 1;  //Toggle between 1 and 2
-    if (mode == 1) {
+    mode++;
+    if (mode > 100) {
+      //Do the battle stuffs!
+      battle(ctx);
+      return;
+    }
+    if (mode %2 == 0) {
       graphics_context_set_fill_color(ctx, GColorBlack);
       graphics_fill_rect(ctx, GRect(0,0,144,169), 0, GCornerNone);
       return;

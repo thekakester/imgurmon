@@ -21,7 +21,8 @@ void update(Layer* layer, GContext* ctx) {
 }
 
 void entity_create(Entity* entity) {
-  entity->x = entity->y = entity->newX = entity->newY = 3;
+  entity->x = entity->newX = 32;
+  entity->y = entity->newY = 60;
   entity->tween_percent = 0.0f;
   entity->direction = 0;  //Default looking down
 }
@@ -72,6 +73,7 @@ static void data_handler(AccelData *data, uint32_t num_samples) {
           srand (time(NULL));
           if (rand() % 10 == 0) {
             mode = 1;  //Switch to battle
+            
           }
         }
         
