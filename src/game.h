@@ -16,6 +16,12 @@ int yOffset;
 //What is our game mode?  0 = normal, 1 = battle
 int mode;
 
+//Which attack was chosen
+int chosen_attack;
+
+//Starting imgurmon id
+int startingImgurmon;
+
 Entity player;
 
 #endif

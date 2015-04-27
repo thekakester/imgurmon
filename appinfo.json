@@ -9,9 +9,84 @@
     "resources": {
         "media": [
             {
+                "file": "images/1.png",
+                "name": "IMGURMON1",
+                "type": "png"
+            },
+            {
                 "file": "data/stats.blob",
                 "name": "STATS",
                 "type": "raw"
+            },
+            {
+                "file": "data/attacks.blob",
+                "name": "ATTACKS",
+                "type": "raw"
+            },
+            {
+                "file": "images/20.png",
+                "name": "IMGURMON20",
+                "type": "png"
+            },
+            {
+                "file": "images/19.png",
+                "name": "IMGURMON19",
+                "type": "png"
+            },
+            {
+                "file": "images/18.png",
+                "name": "IMGURMON18",
+                "type": "png"
+            },
+            {
+                "file": "images/17.png",
+                "name": "IMGURMON17",
+                "type": "png"
+            },
+            {
+                "file": "images/16.png",
+                "name": "IMGURMON16",
+                "type": "png"
+            },
+            {
+                "file": "images/15.png",
+                "name": "IMGURMON15",
+                "type": "png"
+            },
+            {
+                "file": "images/14.png",
+                "name": "IMGURMON14",
+                "type": "png"
+            },
+            {
+                "file": "images/13.png",
+                "name": "IMGURMON13",
+                "type": "png"
+            },
+            {
+                "file": "images/12.png",
+                "name": "IMGURMON12",
+                "type": "png"
+            },
+            {
+                "file": "images/11.png",
+                "name": "IMGURMON11",
+                "type": "png"
+            },
+            {
+                "file": "images/10.png",
+                "name": "IMGURMON10",
+                "type": "png"
+            },
+            {
+                "file": "images/9.png",
+                "name": "IMGURMON9",
+                "type": "png"
+            },
+            {
+                "file": "images/8.png",
+                "name": "IMGURMON8",
+                "type": "png"
             },
             {
                 "file": "images/2.png",
@@ -44,49 +119,9 @@
                 "type": "png"
             },
             {
-                "file": "images/8.png",
-                "name": "IMGURMON8",
-                "type": "png"
-            },
-            {
-                "file": "images/9.png",
-                "name": "IMGURMON9",
-                "type": "png"
-            },
-            {
-                "file": "images/10.png",
-                "name": "IMGURMON10",
-                "type": "png"
-            },
-            {
-                "file": "images/11.png",
-                "name": "IMGURMON11",
-                "type": "png"
-            },
-            {
-                "file": "images/12.png",
-                "name": "IMGURMON12",
-                "type": "png"
-            },
-            {
-                "file": "images/13.png",
-                "name": "IMGURMON13",
-                "type": "png"
-            },
-            {
-                "file": "images/14.png",
-                "name": "IMGURMON14",
-                "type": "png"
-            },
-            {
                 "file": "images/Imgurlogo.png",
                 "menuIcon": true,
                 "name": "logo",
-                "type": "png"
-            },
-            {
-                "file": "images/1.png",
-                "name": "IMGURMON1",
                 "type": "png"
             },
             {
@@ -115,7 +150,7 @@
     "shortName": "Imgurmon",
     "uuid": "139b8a77-436d-40e6-96c0-b4b80a7e1621",
     "versionCode": 1,
-    "versionLabel": "1.0",
+    "versionLabel": "1.21",
     "watchapp": {
         "watchface": false
     }

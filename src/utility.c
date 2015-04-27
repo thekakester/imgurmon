@@ -11,9 +11,9 @@ Stores this to the specified imgurmon pointer
 void imgurmon_stats_create(Imgurmon_Stats* stats, char* name, int hp, int attack1, int attack2, int attack3, int type, int evolve, int evolvelvl) {
   strcpy(&(stats->name[0]), name);
   stats->hp = hp;
-  stats->attack1 = attack1;
-  stats->attack2 = attack2;
-  stats->attack3 = attack3;
+  stats->attacks[0] = attack1;
+  stats->attacks[1] = attack2;
+  stats->attacks[2] = attack3;
   stats->type = type;
   stats->evolve = evolve;
   stats->evolvelvl = evolvelvl;
@@ -64,17 +64,57 @@ void loadStats(Imgurmon_Stats* stats, int id) {
   
     //Bytes 20 and 21 are hp.  Turn this into a buffer
     char buffer[4] = {0,0,s_buffer[20],s_buffer[21]};
-    stats->hp        = buildInt(buffer);
-    stats->attack1   = (int)s_buffer[22];
-    stats->attack2   = (int)s_buffer[23];
-    stats->attack3   = (int)s_buffer[24];
-    stats->type      = (int)s_buffer[25];
-    stats->evolve    = (int)s_buffer[26];
-    stats->evolvelvl = (int)s_buffer[27];
+    stats->hp         = buildInt(buffer);
+    stats->attacks[0] = (int)s_buffer[22];
+    stats->attacks[1] = (int)s_buffer[23];
+    stats->attacks[2] = (int)s_buffer[24];
+    stats->type       = (int)s_buffer[25];
+    stats->evolve     = (int)s_buffer[26];
+    stats->evolvelvl  = (int)s_buffer[27];
     
-    printf("Loading %s. HP:%d, attacks:%d:%d:%d, type:%d, evolvesto:%d, evolvelvl:%d\n",stats->name,stats->hp,stats->attack1,stats->attack2,stats->attack3,stats->type,stats->evolve,stats->evolvelvl);
+    printf("Loading %s. HP:%d, attacks:%d:%d:%d, type:%d, evolvesto:%d, evolvelvl:%d\n",stats->name,stats->hp,stats->attacks[0],stats->attacks[1],stats->attacks[2],stats->type,stats->evolve,stats->evolvelvl);
     //Store this imgurmon
     //imgurmon_stats_create(&(imgurmon_stats[i]),substring,hp,attack1,attack2,attack3,type,evolve,evolvelvl);
+}
+
+/**Load the attacks for a given imgurmon
+*/
+void loadAttacks(Imgurmon* imgurmon) {
+  char s_buffer[20];  //See comment detailing size below
+  // Get resource
+  ResHandle handle = resource_get_handle(RESOURCE_ID_ATTACKS);
+  //resource_load(handle, (uint8_t*)s_buffer, res_size);
+  
+  //Read in all the attacks
+  for (int i = 0; i < 3; i++) {
+    int attackID = imgurmon->stats.attacks[i];
+    printf("Loading attack: %d",attackID);
+    //Each attack takes up 20 bytes, so start at 20*id, and read 20 bytes
+    resource_load_byte_range(handle, 20*attackID, (uint8_t*)&(s_buffer[0]), 20);
+    
+    
+    //Read in the attack
+    //An attack takes up 28 bytes
+      /*Our input file is structured like such:
+  				 * 15 bytes - Name (including null terminator)
+  				 * 1  byte  - Type (fire,water, etc)
+  				 * 1  byte  - Base (min) damage
+  				 * 1  byte  - High (max) damage
+  				 * 1  byte  - Frequency
+  				 * 1  byte  - Count (max amounts of attacks)
+  				 * 
+  				 * Total Size: 20bytes per entry!
+  				 */
+      //Sbuffer is the name
+      strncpy(imgurmon->attacks[i].name,s_buffer,14);
+    
+      //Byte 15 starts remaining stats
+      imgurmon->attacks[i].type = (int)s_buffer[15];
+      imgurmon->attacks[i].low = (int)s_buffer[16];
+      imgurmon->attacks[i].high = (int)s_buffer[17];
+      imgurmon->attacks[i].success_rate = (int)s_buffer[18];
+      imgurmon->attacks[i].count = (int)s_buffer[19];
+  }
 }
 
 void load_map() {
@@ -149,6 +189,12 @@ int getResourceID(int id) {
     case 12:  return RESOURCE_ID_IMGURMON12;
     case 13:  return RESOURCE_ID_IMGURMON13;
     case 14:  return RESOURCE_ID_IMGURMON14;
+    case 15:  return RESOURCE_ID_IMGURMON15;
+    case 16:  return RESOURCE_ID_IMGURMON16;
+    case 17:  return RESOURCE_ID_IMGURMON17;
+    case 18:  return RESOURCE_ID_IMGURMON18;
+    case 19:  return RESOURCE_ID_IMGURMON19;
+    case 20:  return RESOURCE_ID_IMGURMON20;
     default: return RESOURCE_ID_IMGURMON0;
   }
 }
@@ -169,6 +215,7 @@ void loadImgurmon(int player, int id) {
   imgurmon[player].sprite = gbitmap_create_with_resource(getResourceID(id));
   
   loadStats(&(imgurmon[player].stats),id);
+  loadAttacks(&(imgurmon[player]));
   
   //Set the HP and stuff
   imgurmon[player].hp = imgurmon[player].stats.hp;

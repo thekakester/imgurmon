@@ -14,21 +14,41 @@ void timer_handler(void* context) {
   app_timer_register(34, timer_handler, NULL);
 }
 
+/**When the user presses up**/
+static void but_up_click_handler(ClickRecognizerRef recognizer, void *context) {
+  buttonPressed = BUTTON_UP;
+}
+
+/**When the user presses select**/
 static void but_click_handler(ClickRecognizerRef recognizer, void *context) {
-  buttonPressed = 1;
+  buttonPressed = BUTTON_SELECT;
+}
+
+/**When the user presses down**/
+static void but_down_click_handler(ClickRecognizerRef recognizer, void *context) {
+  buttonPressed = BUTTON_DOWN;
+}
+
+/**When the user presses back**/
+static void but_back_click_handler(ClickRecognizerRef recognizer, void *context) {
+  buttonPressed = BUTTON_BACK;
 }
 
 static void click_config_provider(void *context) {
   // Register the ClickHandlers
-  window_single_click_subscribe(BUTTON_ID_UP, but_click_handler);
-  window_single_click_subscribe(BUTTON_ID_DOWN, but_click_handler);
+  window_single_click_subscribe(BUTTON_ID_UP, but_up_click_handler);
+  window_single_click_subscribe(BUTTON_ID_DOWN, but_down_click_handler);
   window_single_click_subscribe(BUTTON_ID_SELECT, but_click_handler);
+  window_single_click_subscribe(BUTTON_ID_BACK, but_back_click_handler);
 }
 
 /**Gets called when we need to update our screen
 */
 void update(Layer* layer, GContext* ctx) {
   render(ctx);  //Call our render in our renderer
+  
+  //Set our button press to 0 (no click)
+  buttonPressed = BUTTON_NO_PRESS;
 }
 
 void entity_create(Entity* entity) {
@@ -100,6 +120,7 @@ static void data_handler(AccelData *data, uint32_t num_samples) {
 void handle_init(void) {
 	// Create a window and text layer
 	window = window_create();
+  window_set_fullscreen(window, true);
   window_stack_push(window,false);
   layer = window_get_root_layer(window);
   
@@ -111,10 +132,10 @@ void handle_init(void) {
   int num_samples = 1;
   accel_data_service_subscribe(num_samples, data_handler);
   
-  //Set button proc
+  //Set button procedures
+  //We need to use a built in helper function to do this!
   window_set_click_config_provider(window, click_config_provider);
-  buttonPressed = 0;
-  printf("Made it here");
+  buttonPressed = BUTTON_NO_PRESS;
   
   //Load up our images
   tiles = gbitmap_create_with_resource(RESOURCE_ID_TILES);
@@ -132,8 +153,10 @@ void handle_init(void) {
   //Set our imgurmon to null (so we know not to clear them)
   imgurmon[0].sprite = imgurmon[1].sprite = (GBitmap*)0;
   
-  //Set our game mode to walking
-  mode = 0;
+  //Initialize some variables
+  mode = 0;    //Set game mode to walking (not battle)
+  menu = 255;  //255 = no menu.  0,1,2,3 = selecting items in menu.
+  startingImgurmon = 1;    //CHERMERNDER!
   
   //Seed random for later use
   srand (time(NULL));
